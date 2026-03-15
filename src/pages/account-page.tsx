@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { AccountDetails } from '@/components/account-details';
+import { SessionList } from '@/components/session-list';
 import { useAccounts } from '@/hooks/use-accounts';
 import { Button } from '@/components/ui/button';
 
@@ -23,11 +24,12 @@ export function AccountPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-6">
-      <AccountDetails account={account} />
+    <div className="min-h-screen p-4 max-w-2xl mx-auto space-y-6 py-8">
       <Link to="/">
         <Button variant="outline">Back to Search</Button>
       </Link>
+      <AccountDetails account={account} />
+      <SessionList accountId={account.id} />
     </div>
   );
 }
