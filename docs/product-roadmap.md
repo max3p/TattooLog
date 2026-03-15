@@ -124,25 +124,6 @@ Photos are essential to the app's value.
 
 ---
 
-## Phase 5: Shop & Artist Configuration
-
-### 5.1 Settings Page
-- Simple settings page (no authentication)
-- Set shop name
-- Manage a list of artist names
-- Artist list is used in session records (dropdown when logging a session)
-
-### 5.2 Data Scoping
-- All data is implicitly scoped to the configured shop
-- Artist filter on client list / session list (optional)
-- Multi-shop support is config-based: switching shop name shows only that shop's data
-
-### 5.3 Data Model Considerations
-- Tag each client and session with `shopId` and `artistId` from the start
-- Even while frontend-only, this structure prepares for a future backend with proper multi-tenancy
-
----
-
 ## Non-Goals (For Now)
 - **Authentication / login** — no user accounts, no passwords
 - **Cloud sync / backend** — all data stays in the browser

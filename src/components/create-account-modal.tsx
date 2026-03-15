@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -30,8 +30,15 @@ export function CreateAccountModal({
 }: CreateAccountModalProps) {
   const [name, setName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [email, setEmail] = useState(isEmail(prefill) ? prefill : '');
-  const [phone, setPhone] = useState(isEmail(prefill) ? '' : prefill);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    if (open) {
+      setEmail(isEmail(prefill) ? prefill : '');
+      setPhone(isEmail(prefill) ? '' : prefill);
+    }
+  }, [open, prefill]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
