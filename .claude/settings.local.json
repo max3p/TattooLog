@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npx create-vite@5 tmp-vite-app --template react-ts)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npx shadcn@2.1.6 init -d)",
+      "Bash(npx shadcn@2.1.6 add button input dialog card label -y)",
+      "Bash(npm run:*)"
+    ]
+  }
+}

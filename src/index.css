@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Eggshell light theme — warm paper surfaces */
+    --background: #F3EBDD;
+    --foreground: #0D0D0D;
+    --card: #E9DDCB;
+    --card-foreground: #0D0D0D;
+    --popover: #E9DDCB;
+    --popover-foreground: #0D0D0D;
+    --primary: #0D0D0D;
+    --primary-foreground: #F3EBDD;
+    --secondary: #D8C8B0;
+    --secondary-foreground: #0D0D0D;
+    --muted: #D8C8B0;
+    --muted-foreground: #6F665C;
+    --accent: #D8C8B0;
+    --accent-foreground: #0D0D0D;
+    --destructive: #8C4B42;
+    --border: #B7A58D;
+    --input: #B7A58D;
+    --ring: #8D7B66;
+    --chart-1: #5F7154;
+    --chart-2: #A67C37;
+    --chart-3: #8C4B42;
+    --chart-4: #5F6C7B;
+    --chart-5: #8D7B66;
+    --radius: 0.5rem;
+    --sidebar: #171717;
+    --sidebar-foreground: #F3EBDD;
+    --sidebar-primary: #F3EBDD;
+    --sidebar-primary-foreground: #0D0D0D;
+    --sidebar-accent: #262626;
+    --sidebar-accent-foreground: #F3EBDD;
+    --sidebar-border: #262626;
+    --sidebar-ring: #8D7B66;
+  }
+
+  .dark {
+    /* Dark editorial theme — charcoal surfaces, warm off-white text */
+    --background: #171717;
+    --foreground: #F3EBDD;
+    --card: #262626;
+    --card-foreground: #F3EBDD;
+    --popover: #262626;
+    --popover-foreground: #F3EBDD;
+    --primary: #F3EBDD;
+    --primary-foreground: #0D0D0D;
+    --secondary: #262626;
+    --secondary-foreground: #F3EBDD;
+    --muted: #262626;
+    --muted-foreground: #B7A58D;
+    --accent: #262626;
+    --accent-foreground: #F3EBDD;
+    --destructive: #8C4B42;
+    --border: #3a3a3a;
+    --input: #3a3a3a;
+    --ring: #8D7B66;
+    --chart-1: #5F7154;
+    --chart-2: #A67C37;
+    --chart-3: #8C4B42;
+    --chart-4: #5F6C7B;
+    --chart-5: #8D7B66;
+    --sidebar: #0D0D0D;
+    --sidebar-foreground: #F3EBDD;
+    --sidebar-primary: #F3EBDD;
+    --sidebar-primary-foreground: #0D0D0D;
+    --sidebar-accent: #171717;
+    --sidebar-accent-foreground: #F3EBDD;
+    --sidebar-border: #262626;
+    --sidebar-ring: #8D7B66;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Averia Serif Libre', serif;
+  }
+}
