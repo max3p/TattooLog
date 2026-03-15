@@ -1,16 +1,23 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AccountDetails } from '@/components/account-details';
 import { SessionList } from '@/components/session-list';
 import { HealthAlertBanner } from '@/components/health-alert-banner';
 import { HealthProfileSection } from '@/components/health-profile-section';
 import { useAccounts } from '@/hooks/use-accounts';
+import { useRecentClients } from '@/hooks/use-recent-clients';
 import { Button } from '@/components/ui/button';
 import type { HealthProfile } from '@/types/account';
 
 export function AccountPage() {
   const { id } = useParams<{ id: string }>();
-  const { getById, updateAccount } = useAccounts();
+  const { accounts, getById, updateAccount } = useAccounts();
+  const { addRecent } = useRecentClients(accounts);
   const account = id ? getById(id) : undefined;
+
+  useEffect(() => {
+    if (account) addRecent(account.id);
+  }, [account?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!account) {
     return (

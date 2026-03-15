@@ -71,5 +71,28 @@ export function useAccounts() {
     [accounts]
   );
 
-  return { accounts, findByPhoneOrEmail, getById, createAccount, updateAccount };
+  const search = useCallback(
+    (query: string): Account[] => {
+      const trimmed = query.trim();
+      if (!trimmed) return [];
+      const lower = trimmed.toLowerCase();
+      const digits = normalizePhone(trimmed);
+      const isEmailQuery = trimmed.includes('@');
+      const isPhoneQuery = digits.length >= 3 && digits.length === trimmed.replace(/[\s()\-+.]/g, '').length;
+
+      if (isEmailQuery) {
+        return accounts.filter((a) => a.email.toLowerCase().includes(lower));
+      }
+      if (isPhoneQuery) {
+        return accounts.filter((a) => normalizePhone(a.phone).includes(digits));
+      }
+      // Name search — partial, case-insensitive
+      return accounts.filter((a) =>
+        a.name.toLowerCase().includes(lower)
+      );
+    },
+    [accounts]
+  );
+
+  return { accounts, findByPhoneOrEmail, search, getById, createAccount, updateAccount };
 }
