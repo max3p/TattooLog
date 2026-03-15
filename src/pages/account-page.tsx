@@ -1,12 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
 import { AccountDetails } from '@/components/account-details';
 import { SessionList } from '@/components/session-list';
+import { HealthAlertBanner } from '@/components/health-alert-banner';
+import { HealthProfileSection } from '@/components/health-profile-section';
 import { useAccounts } from '@/hooks/use-accounts';
 import { Button } from '@/components/ui/button';
+import type { HealthProfile } from '@/types/account';
 
 export function AccountPage() {
   const { id } = useParams<{ id: string }>();
-  const { getById } = useAccounts();
+  const { getById, updateAccount } = useAccounts();
   const account = id ? getById(id) : undefined;
 
   if (!account) {
@@ -23,12 +26,21 @@ export function AccountPage() {
     );
   }
 
+  const handleHealthUpdate = (healthProfile: HealthProfile) => {
+    updateAccount(account.id, { healthProfile });
+  };
+
   return (
     <div className="min-h-screen p-4 max-w-2xl mx-auto space-y-6 py-8">
       <Link to="/">
         <Button variant="outline">Back to Search</Button>
       </Link>
       <AccountDetails account={account} />
+      <HealthAlertBanner healthProfile={account.healthProfile} />
+      <HealthProfileSection
+        healthProfile={account.healthProfile}
+        onUpdate={handleHealthUpdate}
+      />
       <SessionList accountId={account.id} />
     </div>
   );

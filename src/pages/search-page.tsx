@@ -16,7 +16,8 @@ export function SearchPage() {
       navigate(`/account/${account.id}`);
     } else {
       setSearchQuery(query);
-      setModalOpen(true);
+      // Defer so the Enter key event fully resolves before the dialog opens
+      requestAnimationFrame(() => setModalOpen(true));
     }
   };
 

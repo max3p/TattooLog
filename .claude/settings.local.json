@@ -8,7 +8,11 @@
       "Bash(npx shadcn@2.1.6 init -d)",
       "Bash(npx shadcn@2.1.6 add button input dialog card label -y)",
       "Bash(npm run:*)",
-      "Bash(npx shadcn@2.1.6 add select textarea badge separator -y)"
+      "Bash(npx shadcn@2.1.6 add select textarea badge separator -y)",
+      "Bash(xargs ls:*)",
+      "Bash(npx shadcn@latest add checkbox --yes)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)"
     ]
   }
 }

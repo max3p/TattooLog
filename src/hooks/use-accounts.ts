@@ -57,5 +57,19 @@ export function useAccounts() {
     [accounts]
   );
 
-  return { accounts, findByPhoneOrEmail, getById, createAccount };
+  const updateAccount = useCallback(
+    (id: string, updates: Partial<Account>): Account | undefined => {
+      const idx = accounts.findIndex((a) => a.id === id);
+      if (idx === -1) return undefined;
+      const updated = { ...accounts[idx], ...updates };
+      const newList = [...accounts];
+      newList[idx] = updated;
+      setAccounts(newList);
+      saveAccounts(newList);
+      return updated;
+    },
+    [accounts]
+  );
+
+  return { accounts, findByPhoneOrEmail, getById, createAccount, updateAccount };
 }
