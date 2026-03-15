@@ -6,24 +6,10 @@ import { Badge } from '@/components/ui/badge';
 import { User } from 'lucide-react';
 import type { Account } from '@/types/account';
 import { getHealthProfile, getWaiverStatus } from '@/lib/consent-utils';
+import { formatDate, formatPhone } from '@/lib/format-utils';
 
 interface AccountDetailsProps {
   account: Account;
-}
-
-function formatPhone(phone: string): string {
-  if (phone.length === 10) {
-    return `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`;
-  }
-  return phone;
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 function ConsentBadge({ account }: { account: Account }) {

@@ -52,8 +52,6 @@ export function EditConsentDialog({
     onSave({
       signed,
       signedDate: signed && signedDate ? signedDate : null,
-      expiresDate: null,
-      notes: '',
     });
     onOpenChange(false);
   };

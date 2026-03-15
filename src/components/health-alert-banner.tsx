@@ -1,21 +1,10 @@
 import { AlertTriangle } from 'lucide-react';
 import type { HealthProfile } from '@/types/account';
 import { getHealthProfile } from '@/lib/consent-utils';
-import { COMMON_MEDICAL_FLAGS, ALLERGY_TYPES } from '@/lib/medical-constants';
+import { getFlagLabel, getAllergyTypeLabel } from '@/lib/format-utils';
 
 interface HealthAlertBannerProps {
   healthProfile?: HealthProfile;
-}
-
-function getFlagLabel(flag: string, customLabel?: string): string {
-  if (flag === 'custom' && customLabel) return customLabel;
-  const found = COMMON_MEDICAL_FLAGS.find((f) => f.value === flag);
-  return found?.label ?? flag;
-}
-
-function getAllergyTypeLabel(type: string): string {
-  const found = ALLERGY_TYPES.find((a) => a.value === type);
-  return found?.label ?? type;
 }
 
 export function HealthAlertBanner({ healthProfile }: HealthAlertBannerProps) {

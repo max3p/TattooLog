@@ -1,15 +1,9 @@
 import { Link } from 'react-router-dom';
 import type { Account } from '@/types/account';
+import { formatPhone } from '@/lib/format-utils';
 
 interface SearchResultCardProps {
   account: Account;
-}
-
-function formatPhone(phone: string): string {
-  if (phone.length === 10) {
-    return `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`;
-  }
-  return phone;
 }
 
 export function SearchResultCard({ account }: SearchResultCardProps) {

@@ -13,13 +13,11 @@ export interface MedicalFlag {
   active: boolean;
 }
 
-export type WaiverStatus = 'current' | 'expired' | 'missing';
+export type WaiverStatus = 'current' | 'missing';
 
 export interface ConsentRecord {
   signed: boolean;
   signedDate: string | null;
-  expiresDate: string | null;
-  notes: string;
 }
 
 export interface HealthProfile {

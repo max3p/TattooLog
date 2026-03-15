@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Select,
   SelectContent,
@@ -93,15 +94,15 @@ export function CheckInDialog({
               rows={3}
             />
           </div>
-          <div className="flex items-center space-x-2">
-            <input
+          <div className="flex items-center space-x-3">
+            <Checkbox
               id="checkin-touchup"
-              type="checkbox"
               checked={touchUpNeeded}
-              onChange={(e) => setTouchUpNeeded(e.target.checked)}
-              className="h-4 w-4 rounded border-border"
+              onCheckedChange={(checked) => setTouchUpNeeded(checked === true)}
             />
-            <Label htmlFor="checkin-touchup">Touch-up Needed</Label>
+            <Label htmlFor="checkin-touchup" className="font-normal cursor-pointer">
+              Touch-up Needed
+            </Label>
           </div>
           <Button type="submit" className="w-full" disabled={!healingStatus}>
             Save Check-in

@@ -136,6 +136,7 @@ export function EditMedicalFlagsDialog({
                     variant="ghost"
                     size="icon"
                     className="shrink-0"
+                    aria-label="Remove custom flag"
                     onClick={() => removeCustomFlag(flag.id)}
                   >
                     <X className="h-4 w-4" />

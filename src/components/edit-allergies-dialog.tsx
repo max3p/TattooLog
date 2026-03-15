@@ -125,6 +125,7 @@ export function EditAllergiesDialog({
                   variant="ghost"
                   size="icon"
                   className="shrink-0"
+                  aria-label="Remove allergy"
                   onClick={() => removeAllergy(allergy.id)}
                 >
                   <X className="h-4 w-4" />

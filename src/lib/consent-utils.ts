@@ -14,8 +14,6 @@ export function getDefaultHealthProfile(): HealthProfile {
     consent: {
       signed: false,
       signedDate: null,
-      expiresDate: null,
-      notes: '',
     },
   };
 }

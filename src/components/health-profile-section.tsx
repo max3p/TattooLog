@@ -15,7 +15,7 @@ import type {
   ConsentRecord,
 } from '@/types/account';
 import { getHealthProfile, getWaiverStatus } from '@/lib/consent-utils';
-import { COMMON_MEDICAL_FLAGS, ALLERGY_TYPES } from '@/lib/medical-constants';
+import { formatDate, getFlagLabel, getAllergyTypeLabel } from '@/lib/format-utils';
 import { EditAllergiesDialog } from '@/components/edit-allergies-dialog';
 import { EditMedicalFlagsDialog } from '@/components/edit-medical-flags-dialog';
 import { EditConsentDialog } from '@/components/edit-consent-dialog';
@@ -23,25 +23,6 @@ import { EditConsentDialog } from '@/components/edit-consent-dialog';
 interface HealthProfileSectionProps {
   healthProfile?: HealthProfile;
   onUpdate: (profile: HealthProfile) => void;
-}
-
-function getFlagLabel(flag: string, customLabel?: string): string {
-  if (flag === 'custom' && customLabel) return customLabel;
-  const found = COMMON_MEDICAL_FLAGS.find((f) => f.value === flag);
-  return found?.label ?? flag;
-}
-
-function getAllergyTypeLabel(type: string): string {
-  const found = ALLERGY_TYPES.find((a) => a.value === type);
-  return found?.label ?? type;
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 function WaiverStatusBadge({ consent }: { consent: ConsentRecord }) {

@@ -63,9 +63,7 @@ export function SearchPage() {
             <p className="text-muted-foreground">No clients found</p>
             <Button
               variant="outline"
-              onClick={() =>
-                requestAnimationFrame(() => setModalOpen(true))
-              }
+              onClick={() => setModalOpen(true)}
             >
               Create Account
             </Button>

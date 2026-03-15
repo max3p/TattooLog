@@ -11,19 +11,11 @@ import { Button } from '@/components/ui/button';
 import { CheckInDialog } from '@/components/check-in-dialog';
 import { CheckInTimeline } from '@/components/check-in-timeline';
 import type { TattooSession, CheckIn } from '@/types/session';
+import { formatDate } from '@/lib/format-utils';
 
 interface SessionDetailsProps {
   session: TattooSession;
   onAddCheckIn: (data: Omit<CheckIn, 'id'>) => void;
-}
-
-function formatDate(iso: string): string {
-  if (!iso) return '—';
-  return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 function formatDuration(minutes: number | null): string {
@@ -118,9 +110,12 @@ export function SessionDetails({ session, onAddCheckIn }: SessionDetailsProps) {
         </CardContent>
       </Card>
 
-      <Separator />
-
-      <Field label="Follow-up Date" value={formatDate(session.followUpDate)} />
+      {session.followUpDate && !session.healingNotes && (
+        <>
+          <Separator />
+          <Field label="Follow-up Date" value={formatDate(session.followUpDate)} />
+        </>
+      )}
 
       <CheckInDialog
         open={checkInOpen}

@@ -89,35 +89,14 @@ Expand the client profile with medical/safety information.
 
 ---
 
-## Phase 3: Photo Management
-Photos are essential to the app's value.
+## Phase 3: Search & Navigation Improvements
 
-### 3.1 Photo Upload & Storage
-- Support image uploads (camera or file picker) for tattoo sessions
-- Store photos in localStorage as base64 or use IndexedDB for blob storage (localStorage has size limits)
-- Consider IndexedDB migration for this phase due to photo size
-
-### 3.2 Photo Categories per Session
-- Reference / design art
-- Stencil placement
-- Fresh tattoo (day-of)
-- Healed progress (can add multiple over time with dates)
-
-### 3.3 Photo Gallery View
-- Grid view of all photos for a client across sessions
-- Filter by session or photo type
-- Tap to view full-size
-
----
-
-## Phase 4: Search & Navigation Improvements
-
-### 4.1 Enhanced Search
+### 3.1 Enhanced Search
 - Add **name search** to the existing phone/email lookup
 - Search should match partial names (e.g., "Joh" finds "John Doe")
 - Single search input that detects query type (name, email, or phone)
 
-### 4.2 Recent Clients
+### 3.2 Recent Clients
 - Show a list of recently viewed / recently created clients below the search bar on the landing page
 - Persist recent list in localStorage (last 10–20 clients)
 - Each entry shows name, last visit date, and a quick link to their profile
