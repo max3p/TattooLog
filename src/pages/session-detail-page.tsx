@@ -10,7 +10,7 @@ export function SessionDetailPage() {
     sessionId: string;
   }>();
   const { getById: getAccountById } = useAccounts();
-  const { getById: getSessionById } = useSessions();
+  const { getById: getSessionById, addCheckIn } = useSessions();
 
   const account = accountId ? getAccountById(accountId) : undefined;
   const session = sessionId ? getSessionById(sessionId) : undefined;
@@ -38,7 +38,10 @@ export function SessionDetailPage() {
       >
         &larr; {account.name}
       </Link>
-      <SessionDetails session={session} />
+      <SessionDetails
+        session={session}
+        onAddCheckIn={(data) => addCheckIn(session.id, data)}
+      />
     </div>
   );
 }

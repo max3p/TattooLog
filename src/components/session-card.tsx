@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import type { TattooSession } from '@/types/session';
+import type { TattooSession, HealingStatus } from '@/types/session';
+import { getLatestHealingStatus } from '@/lib/check-in-utils';
 
 interface SessionCardProps {
   session: TattooSession;
@@ -16,7 +17,7 @@ function formatDate(iso: string): string {
   });
 }
 
-function healingBadge(outcome: TattooSession['healingOutcome']) {
+function healingBadge(outcome: HealingStatus) {
   switch (outcome) {
     case 'good':
       return <Badge className="bg-[#5F7154] text-white">Good</Badge>;
@@ -42,7 +43,7 @@ export function SessionCard({ session }: SessionCardProps) {
               <span className="font-medium truncate">
                 {session.description || 'Untitled Session'}
               </span>
-              {healingBadge(session.healingOutcome)}
+              {healingBadge(getLatestHealingStatus(session))}
             </div>
             <p className="text-sm text-muted-foreground">
               {formatDate(session.date)}

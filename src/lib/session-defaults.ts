@@ -18,6 +18,7 @@ export function createEmptyDraft(): SessionDraft {
     touchUpNeeded: false,
     touchUpNotes: '',
     followUpDate: '',
+    checkIns: [],
   };
 }
 
@@ -47,6 +48,7 @@ export function createSessionFromDraft(
     touchUpNeeded: draft.touchUpNeeded ?? false,
     touchUpNotes: draft.touchUpNotes ?? '',
     followUpDate: draft.followUpDate ?? '',
+    checkIns: draft.checkIns ?? [],
     createdAt: now,
     updatedAt: now,
   };

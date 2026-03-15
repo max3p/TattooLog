@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { TattooSession, SessionDraft } from '@/types/session';
+import type { TattooSession, SessionDraft, CheckIn } from '@/types/session';
 import { createSessionFromDraft } from '@/lib/session-defaults';
 
 const STORAGE_KEY = 'tattoo_passport_sessions';
@@ -79,5 +79,16 @@ export function useSessions() {
     [sessions]
   );
 
-  return { sessions, getByAccountId, getById, createSession, updateSession, deleteSession };
+  const addCheckIn = useCallback(
+    (sessionId: string, data: Omit<CheckIn, 'id'>): TattooSession | undefined => {
+      const session = sessions.find((s) => s.id === sessionId);
+      if (!session) return undefined;
+      const newCheckIn: CheckIn = { ...data, id: crypto.randomUUID() };
+      const updatedCheckIns = [...(session.checkIns ?? []), newCheckIn];
+      return updateSession(sessionId, { checkIns: updatedCheckIns });
+    },
+    [sessions, updateSession]
+  );
+
+  return { sessions, getByAccountId, getById, createSession, updateSession, deleteSession, addCheckIn };
 }

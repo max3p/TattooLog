@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Card,
@@ -5,13 +6,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import type { TattooSession } from '@/types/session';
+import { CheckInDialog } from '@/components/check-in-dialog';
+import { CheckInTimeline } from '@/components/check-in-timeline';
+import type { TattooSession, CheckIn } from '@/types/session';
 
 interface SessionDetailsProps {
   session: TattooSession;
+  onAddCheckIn: (data: Omit<CheckIn, 'id'>) => void;
 }
 
 function formatDate(iso: string): string {
@@ -31,19 +34,6 @@ function formatDuration(minutes: number | null): string {
   return m > 0 ? `${h}h ${m}m` : `${h}h`;
 }
 
-function healingLabel(outcome: TattooSession['healingOutcome']) {
-  switch (outcome) {
-    case 'good':
-      return <Badge className="bg-[#5F7154] text-white">Good</Badge>;
-    case 'minor_issues':
-      return <Badge className="bg-[#A67C37] text-white">Minor Issues</Badge>;
-    case 'complications':
-      return <Badge className="bg-[#8C4B42] text-white">Complications</Badge>;
-    default:
-      return <span className="text-muted-foreground">Not recorded</span>;
-  }
-}
-
 function Field({ label, value }: { label: string; value: string }) {
   if (!value) return null;
   return (
@@ -54,7 +44,10 @@ function Field({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function SessionDetails({ session }: SessionDetailsProps) {
+export function SessionDetails({ session, onAddCheckIn }: SessionDetailsProps) {
+  const [checkInOpen, setCheckInOpen] = useState(false);
+  const checkIns = session.checkIns ?? [];
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -97,27 +90,46 @@ export function SessionDetails({ session }: SessionDetailsProps) {
         </CardContent>
       </Card>
 
+      {session.healingNotes && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Session Notes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>{session.healingNotes}</p>
+            <Field label="Follow-up Date" value={formatDate(session.followUpDate)} />
+          </CardContent>
+        </Card>
+      )}
+
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Healing &amp; Notes</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0">
+          <CardTitle className="text-lg">Healing Check-ins</CardTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCheckInOpen(true)}
+          >
+            Add Check-in
+          </Button>
         </CardHeader>
-        <CardContent className="space-y-3">
-          <div>
-            <p className="text-sm text-muted-foreground">Healing Outcome</p>
-            <div className="mt-1">{healingLabel(session.healingOutcome)}</div>
-          </div>
-          <Field label="Healing Notes" value={session.healingNotes} />
-          <Separator />
-          <div>
-            <p className="text-sm text-muted-foreground">Touch-up Needed</p>
-            <p>{session.touchUpNeeded ? 'Yes' : 'No'}</p>
-          </div>
-          {session.touchUpNeeded && (
-            <Field label="Touch-up Notes" value={session.touchUpNotes} />
-          )}
-          <Field label="Follow-up Date" value={formatDate(session.followUpDate)} />
+        <CardContent>
+          <CheckInTimeline checkIns={checkIns} />
         </CardContent>
       </Card>
+
+      <Separator />
+
+      <Field label="Follow-up Date" value={formatDate(session.followUpDate)} />
+
+      <CheckInDialog
+        open={checkInOpen}
+        onOpenChange={setCheckInOpen}
+        onSubmit={(data) => {
+          onAddCheckIn(data);
+          setCheckInOpen(false);
+        }}
+      />
     </div>
   );
 }

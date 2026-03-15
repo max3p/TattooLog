@@ -1,3 +1,13 @@
+export interface CheckIn {
+  id: string;
+  date: string;
+  healingStatus: 'good' | 'minor_issues' | 'complications';
+  notes: string;
+  touchUpNeeded: boolean;
+}
+
+export type HealingStatus = '' | 'good' | 'minor_issues' | 'complications';
+
 export interface TattooSession {
   id: string;
   accountId: string;
@@ -19,12 +29,15 @@ export interface TattooSession {
   stencilMethod: string;
   durationMinutes: number | null;
 
-  // Step 4: Healing & Notes
-  healingOutcome: '' | 'good' | 'minor_issues' | 'complications';
-  healingNotes: string;
-  touchUpNeeded: boolean;
-  touchUpNotes: string;
+  // Step 4: Session Notes
+  healingOutcome: HealingStatus; // legacy — prefer checkIns
+  healingNotes: string;          // repurposed as general session notes
+  touchUpNeeded: boolean;        // legacy — prefer checkIns
+  touchUpNotes: string;          // legacy — prefer checkIns
   followUpDate: string;
+
+  // Check-ins
+  checkIns: CheckIn[];
 
   createdAt: string;
   updatedAt: string;
@@ -40,9 +53,9 @@ export type SessionTechnical = Pick<
   'needleConfig' | 'inkBrands' | 'inkColors' | 'machineType' | 'stencilMethod' | 'durationMinutes'
 >;
 
-export type SessionHealing = Pick<
+export type SessionNotes = Pick<
   TattooSession,
-  'healingOutcome' | 'healingNotes' | 'touchUpNeeded' | 'touchUpNotes' | 'followUpDate'
+  'healingNotes' | 'followUpDate'
 >;
 
 export type SessionDraft = Partial<

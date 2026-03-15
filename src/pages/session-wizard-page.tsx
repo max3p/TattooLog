@@ -6,7 +6,7 @@ import { createEmptyDraft } from '@/lib/session-defaults';
 import { WizardBasics } from '@/components/wizard/wizard-basics';
 import { WizardTechnical } from '@/components/wizard/wizard-technical';
 import { WizardPhotos } from '@/components/wizard/wizard-photos';
-import { WizardHealing } from '@/components/wizard/wizard-healing';
+import { WizardNotes } from '@/components/wizard/wizard-notes';
 import { WizardNav } from '@/components/wizard/wizard-nav';
 import { Button } from '@/components/ui/button';
 import type { SessionDraft } from '@/types/session';
@@ -104,13 +104,10 @@ export function SessionWizardPage() {
       onChange={handleChange}
     />,
     <WizardPhotos key="photos" />,
-    <WizardHealing
-      key="healing"
+    <WizardNotes
+      key="notes"
       data={{
-        healingOutcome: draft.healingOutcome ?? '',
         healingNotes: draft.healingNotes ?? '',
-        touchUpNeeded: draft.touchUpNeeded ?? false,
-        touchUpNotes: draft.touchUpNotes ?? '',
         followUpDate: draft.followUpDate ?? '',
       }}
       onChange={handleChange}
